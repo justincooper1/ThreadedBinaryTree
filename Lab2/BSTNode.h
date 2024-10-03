@@ -20,11 +20,19 @@ private:
   BSTNode* lc;            // Pointer to left child
   BSTNode* rc;            // Pointer to right child
 
+  // Bit field instead of boolean
+  unsigned int isThreadedLeft : 1;
+  unsigned int isThreadedRight : 1;
+
 public:
   // Two constructors -- with and without initial values
-  BSTNode() { lc = rc = NULL; }
-  BSTNode(Key K, E e, BSTNode* l =NULL, BSTNode* r =NULL)
-    { k = K; it = e; lc = l; rc = r; }
+  BSTNode() { lc = rc = NULL; isThreadedLeft = 0; isThreadedRight = 0; }
+  BSTNode(Key K, E e, BSTNode* l =NULL, BSTNode* r =NULL, bool leftThread = false, bool rightThread = false)
+  {
+      k = K; it = e; lc = l; rc = r;
+      isThreadedLeft = leftThread ? 1 : 0;
+      isThreadedRight = rightThread ? 1 : 0;
+  }
   ~BSTNode() {}             // Destructor
 
   // Functions to set and return the value and key
