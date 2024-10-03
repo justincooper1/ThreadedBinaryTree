@@ -43,9 +43,18 @@ public:
 
   // Functions to set and return the children
   inline BSTNode* left() const { return lc; }
-  void setLeft(BinNode<E>* b) { lc = (BSTNode*)b; }
+  void setLeft(BinNode<E>* b, bool isThread = false)
+  {
+      lc = (BSTNode*)b;
+      isThreadedLeft = isThread ? 1 : 0;
+  }
+
   inline BSTNode* right() const { return rc; }
-  void setRight(BinNode<E>* b) { rc = (BSTNode*)b; }
+  void setRight(BinNode<E>* b, bool isThread = false)
+  {
+      rc = (BSTNode*)b;
+      isThreadedRight = isThread ? 1 : 0;
+  }
 
   // Return true if it is a leaf, false otherwise
   bool isLeaf() { return (lc == NULL) && (rc == NULL); }
