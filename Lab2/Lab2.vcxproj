@@ -129,6 +129,13 @@
   <ItemGroup>
     <ClCompile Include="Lab2.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BinNode.h" />
+    <ClInclude Include="book.h" />
+    <ClInclude Include="BST.h" />
+    <ClInclude Include="BSTNode.h" />
+    <ClInclude Include="dictionary.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
