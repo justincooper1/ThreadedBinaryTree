@@ -34,6 +34,9 @@ private:
   void printhelp(BSTNode<Key, E>*, int) const;
   void vist(BSTNode<Key, E>*) const;
 
+  void traverseTree(BSTNode<Key, E>* root, void (*visit)(BSTNode<Key, E>*, int), int level = 0) const;
+  static void printNode(BSTNode<Key, E>* node, int level);
+
 public:
   BST() { root = NULL; nodecount = 0; }  // Constructor
   
@@ -125,7 +128,7 @@ BSTNode<Key, E>* BST<Key, E>::inserthelp(
       prev = curr;
       if (k < curr->key())
       {
-          if (!curr->getIsThreadedLeft())
+          if (!curr->leftIsThreaded())
           {
               curr = curr->left();
           }
@@ -133,7 +136,7 @@ BSTNode<Key, E>* BST<Key, E>::inserthelp(
       }
       else
       {
-          if (!curr->getIsThreadedRight())
+          if (!curr->rightIsThreaded())
           {
               curr = curr->right();
           }
@@ -229,10 +232,31 @@ E* BST<Key, E>::findhelp(BSTNode<Key, E>* root,
 template <typename Key, typename E>
 void BST<Key, E>::
 printhelp(BSTNode<Key, E>* root, int level) const {
-  if (root == NULL) return;           // Empty tree
-  printhelp(root->left(), level+1);   // Do left subtree
-  for (int i=0; i<level; i++)         // Indent to level
-    cout << "  ";
-  cout << root->key() << "\n";        // Print node value
-  printhelp(root->right(), level+1);  // Do right subtree
+    traverseTree(root, printNode, level);
 }
+
+// Helper function to traverse the tree
+template <typename Key, typename E>
+void BST<Key, E>::traverseTree(BSTNode<Key, E>* root, void (*visit)(BSTNode<Key, E>*, int), int level) const {
+    if (root == NULL) return; // Empty
+
+    // Traverse left side
+    if (root->left() != NULL && !root->leftIsThreaded())
+        traverseTree(root->left(), visit, level + 1);
+
+    visit(root, level);
+
+    // Traverse right side
+    if (root->right() != NULL && !root->rightIsThreaded())
+        traverseTree(root->right(), visit, level + 1);
+}
+
+// Print function for printhelp
+template <typename Key, typename E>
+void BST<Key, E>::printNode(BSTNode<Key, E>* node, int level) {
+    for (int i = 0; i < level; i++) {
+        cout << "  ";
+    }
+    cout << node->key() << "\n";
+}
+

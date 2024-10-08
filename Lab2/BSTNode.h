@@ -60,12 +60,22 @@ public:
   bool isLeaf() { return (lc == NULL) && (rc == NULL); }
 
   // Getter functions used for BST.h
-  bool getIsThreadedLeft() const
+  bool leftIsThreaded() const
   {
       return isThreadedLeft;
   }
-  bool getIsThreadedRight() const
+  bool rightIsThreaded() const
   {
       return isThreadedRight;
+  }
+
+  // Setter functions
+  void setLeftThread(bool isThread)
+  {
+      isThreadedLeft = isThread;
+  }
+  void setRightThread(bool isThread)
+  {
+      isThreadedRight = isThread;
   }
 };
