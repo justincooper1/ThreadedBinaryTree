@@ -31,13 +31,13 @@ int main()
     cout << "My tree's structure is: \n";
     bst.print();
 
-    cout << "Inorder printing of my tree:" << endl;
+    cout << "\nInorder printing of my tree:" << endl;
     bst.printInOrder();
     cout << endl;
-    /*
+    
     cout << "Reverse order printing of my tree:" << endl;
     bst.printReverse();
-    cout << endl;*/
+    cout << endl;
 
     return 0;
 }

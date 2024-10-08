@@ -279,3 +279,29 @@ void BST<Key, E>::printInOrder() const
     traverseTree(root, printInOrderNode);
 }
 
+// Print node for reverse
+template <typename Key, typename E>
+void printReverseNode(BSTNode<Key, E>* node, int level) {
+    cout << node->key() << "-" << node->element() << "\n";
+}
+
+// Print in reverse order
+template <typename Key, typename E>
+void BST<Key, E>::printReverse() const {
+    BSTNode<Key, E>* curr = root;
+    while (curr != NULL && curr->right() != NULL && !curr->rightIsThreaded()) {
+        curr = curr->right();
+    }
+    while (curr != NULL) {
+        cout << curr->key() << "-" << curr->element() << "\n";
+        if (curr->left() != NULL && !curr->leftIsThreaded()) {
+            curr = curr->left();
+            while (curr->right() != NULL && !curr->rightIsThreaded()) {
+                curr = curr->right();
+            }
+        }
+        else {
+            curr = curr->left();
+        }
+    }
+}
