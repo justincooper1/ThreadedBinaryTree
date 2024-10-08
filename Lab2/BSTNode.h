@@ -58,4 +58,14 @@ public:
 
   // Return true if it is a leaf, false otherwise
   bool isLeaf() { return (lc == NULL) && (rc == NULL); }
+
+  // Getter functions used for BST.h
+  bool getIsThreadedLeft() const
+  {
+      return isThreadedLeft;
+  }
+  bool getIsThreadedRight() const
+  {
+      return isThreadedRight;
+  }
 };

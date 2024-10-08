@@ -116,10 +116,47 @@ BSTNode<Key, E>* BST<Key, E>::inserthelp(
     BSTNode<Key, E>* root, const Key& k, const E& it) {
   if (root == NULL)  // Empty tree: create node
     return new BSTNode<Key, E>(k, it, NULL, NULL);
-  if (k < root->key())
-    root->setLeft(inserthelp(root->left(), k, it));
-  else root->setRight(inserthelp(root->right(), k, it));
-  return root;       // Return tree with node inserted
+  
+  BSTNode<Key, E>* curr = root;
+  BSTNode<Key, E>* prev = NULL;
+
+  while (curr != NULL)
+  {
+      prev = curr;
+      if (k < curr->key())
+      {
+          if (!curr->getIsThreadedLeft())
+          {
+              curr = curr->left();
+          }
+          else break;
+      }
+      else
+      {
+          if (!curr->getIsThreadedRight())
+          {
+              curr = curr->right();
+          }
+          else break;
+      }
+  }
+
+  BSTNode<Key, E>* newNode = new BSTNode<Key, E>(k, it);
+
+  if (k < prev->key())
+  {
+      newNode->setLeft(prev->left(), true);
+      newNode->setRight(prev, true);
+      prev->setLeft(newNode);
+  }
+  else
+  {
+      newNode->setRight(prev->right(), true);
+      newNode->setLeft(prev, true);
+      prev->setRight(newNode);
+  }
+
+  return root;
 }
 
 // Delete the minimum value from the BST, returning the revised BST
