@@ -303,12 +303,6 @@ void BST<Key, E>::printInOrder() const
     }
 }
 
-// Print node for reverse
-template <typename Key, typename E>
-void printReverseNode(BSTNode<Key, E>* node, int level) {
-    cout << node->key() << "-" << node->element() << "\n";
-}
-
 // Print in reverse order
 template <typename Key, typename E>
 void BST<Key, E>::printReverse() const {
