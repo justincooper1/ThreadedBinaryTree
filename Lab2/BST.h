@@ -276,7 +276,31 @@ void printInOrderNode(BSTNode<Key, E>* node, int level)
 template<typename Key, typename E>
 void BST<Key, E>::printInOrder() const
 {
-    traverseTree(root, printInOrderNode);
+    BSTNode<Key, E>* curr = root;
+
+    while (curr != NULL && curr->left() != NULL && !curr->leftIsThreaded())
+    {
+        curr = curr->left(); // Gets left-most node
+    }
+
+    // Go through the tree in order and print
+    while (curr != NULL) {
+        cout << curr->key() << "-" << curr->element() << "\n";
+
+        // Moves to left-most node
+        if (curr->right() != NULL && !curr->rightIsThreaded())
+        {
+            curr = curr->right();
+            while (curr->left() != NULL && !curr->leftIsThreaded())
+            {
+                curr = curr->left();
+            }
+        }
+        else
+        {
+            curr = curr->right();
+        }
+    }
 }
 
 // Print node for reverse
