@@ -38,6 +38,9 @@ private:
   static void printNode(BSTNode<Key, E>* node, int level);
 
 public:
+    void printInOrder() const;
+    void printReverse() const;
+
   BST() { root = NULL; nodecount = 0; }  // Constructor
   
   //Note from Prof Sipantzi -- I've commented out the destructor
@@ -237,7 +240,8 @@ printhelp(BSTNode<Key, E>* root, int level) const {
 
 // Helper function to traverse the tree
 template <typename Key, typename E>
-void BST<Key, E>::traverseTree(BSTNode<Key, E>* root, void (*visit)(BSTNode<Key, E>*, int), int level) const {
+void BST<Key, E>::traverseTree(BSTNode<Key, E>* root, void (*visit)(BSTNode<Key, E>*, int), int level) const
+{
     if (root == NULL) return; // Empty
 
     // Traverse left side
@@ -253,10 +257,25 @@ void BST<Key, E>::traverseTree(BSTNode<Key, E>* root, void (*visit)(BSTNode<Key,
 
 // Print function for printhelp
 template <typename Key, typename E>
-void BST<Key, E>::printNode(BSTNode<Key, E>* node, int level) {
+void BST<Key, E>::printNode(BSTNode<Key, E>* node, int level)
+{
     for (int i = 0; i < level; i++) {
         cout << "  ";
     }
     cout << node->key() << "\n";
+}
+
+
+// Print node for inorder
+template <typename Key, typename E>
+void printInOrderNode(BSTNode<Key, E>* node, int level)
+{
+    cout << node->key() << "-" << node->element() << "\n";
+}
+
+template<typename Key, typename E>
+void BST<Key, E>::printInOrder() const
+{
+    traverseTree(root, printInOrderNode);
 }
 
